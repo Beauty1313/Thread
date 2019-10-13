@@ -1,10 +1,5 @@
-package com.edu.seu.yujun.OS;
-/**
- * 
- * @author 15052
- * 
- *
- */
+
+
 public class workThread implements Runnable {
 	
 	private int start;
