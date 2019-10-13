@@ -1,4 +1,4 @@
-package com.edu.seu.yujun.OS;
+
 
 import java.util.concurrent.ExecutorService;
 
@@ -6,25 +6,23 @@ import java.util.concurrent.Executors;
 
 public class Driver {
 
-	/**
-	 * @param args
-	 */
-	public final static int M=1024;//¶¨Òå³£Á¿£º¾ØÕóAµÄĞĞÊı
-	public final static int K=1024;//¶¨Òå³£Á¿£º¾ØÕóAµÄÁĞÊı£¬¾ØÕóBµÄĞĞÊı
-	public final static int N=1024;//¶¨Òå³£Á¿£º¾ØÕóBµÄÁĞÊı
-	final static int NUM_THREADS=2;//¶¨Òå³£Á¿£ºÏß³ÌÊıÁ¿
-	private static int [][]A;//¾ØÕóA
-	private static int [][]B;//¾ØÕóB
-	private static int [][]C;//¾ØÕóC
+
+	public final static int M=1024;//å®šä¹‰å¸¸é‡ï¼šçŸ©é˜µAçš„è¡Œæ•°
+	public final static int K=1024;//å®šä¹‰å¸¸é‡ï¼šçŸ©é˜µAçš„åˆ—æ•°ï¼ŒçŸ©é˜µBçš„è¡Œæ•°
+	public final static int N=1024;//å®šä¹‰å¸¸é‡ï¼šçŸ©é˜µBçš„åˆ—æ•°
+	final static int NUM_THREADS=2;//å®šä¹‰å¸¸é‡ï¼šçº¿ç¨‹æ•°é‡
+	private static int [][]A;//çŸ©é˜µA
+	private static int [][]B;//çŸ©é˜µB
+	private static int [][]C;//çŸ©é˜µC
 	public Driver(){
 		A=new int[M][K];
 		B=new int[K][N];
-		C=new int[M][N];//A¡¢B¡¢C³õÊ¼»¯
-		fillRandom(A);//ÓÃ0-99µÄËæ»úÊı³õÊ¼»¯¾ØÕóA
-		fillRandom(B);//ÓÃ0-99µÄËæ»úÊı³õÊ¼»¯¾ØÕóB
+		C=new int[M][N];//Aã€Bã€Cåˆå§‹åŒ–
+		fillRandom(A);//ç”¨0-99çš„éšæœºæ•°åˆå§‹åŒ–çŸ©é˜µA
+		fillRandom(B);//ç”¨0-99çš„éšæœºæ•°åˆå§‹åŒ–çŸ©é˜µB
 		for(int i=0;i<M;i++)
 			for(int j=0;j<N;j++)
-				C[i][j]=0;//½«C¾ØÕóÈ«ÖÃÁã	
+				C[i][j]=0;//å°†CçŸ©é˜µå…¨ç½®é›¶	
 	}
 	private void fillRandom(int[][] A){
 		for(int i=0;i<A.length;i++){
@@ -73,42 +71,41 @@ public class Driver {
 			
 			
 		}
-		long time2=System.currentTimeMillis();//¼ÇÂ¼½áÊøÊ±¼ä
-		System.out.println("¼ÆËã["+M+","+K+"]Óë["+K+","+N+"]½×¾ØÕó³Ë·¨,²¢ĞĞ("+NUM_THREADS+"Ïß³Ì)ÓÃÊ±:"+(time2-time1)+"ºÁÃë");
+		long time2=System.currentTimeMillis();//è®°å½•ç»“æŸæ—¶é—´
+		System.out.println("è®¡ç®—["+M+","+K+"]ä¸["+K+","+N+"]é˜¶çŸ©é˜µä¹˜æ³•,å¹¶è¡Œ("+NUM_THREADS+"çº¿ç¨‹)ç”¨æ—¶:"+(time2-time1)+"æ¯«ç§’");
 		System.out.println(C[rol[0]][col[0]]+" "+C[rol[1]][col[1]]+" "+C[rol[2]][col[2]]);
 		System.out.println();
-		
-		//·½·¨¶ş£º´®ĞĞÒ²¾ÍÊÇÖ±½Ó½øĞĞÔËËã
+	
 		for(int i=0;i<M;i++)
 			for(int j=0;j<N;j++)
-				C[i][j]=0;//½«C¾ØÕóÈ«ÖÃÁã	
-		long time3=System.currentTimeMillis();//¼ÇÂ¼¿ªÊ¼Ê±¼ä
-		singleThread();//µ÷ÓÃ´®ĞĞ¼ÆËãº¯Êı
-		long time4=System.currentTimeMillis();//¼ÇÂ¼½áÊøÊ±¼ä
-		System.out.println("¼ÆËã["+M+","+K+"]Óë["+K+","+N+"]½×¾ØÕó³Ë·¨,Ö±½Ó¼ÆËãÓÃÊ±:"+(time4-time3)+"ºÁÃë");
+				C[i][j]=0;//å°†CçŸ©é˜µå…¨ç½®é›¶	
+		long time3=System.currentTimeMillis();//è®°å½•å¼€å§‹æ—¶é—´
+		singleThread();//è°ƒç”¨ä¸²è¡Œè®¡ç®—å‡½æ•°
+		long time4=System.currentTimeMillis();//è®°å½•ç»“æŸæ—¶é—´
+		System.out.println("è®¡ç®—["+M+","+K+"]ä¸["+K+","+N+"]é˜¶çŸ©é˜µä¹˜æ³•,ç›´æ¥è®¡ç®—ç”¨æ—¶:"+(time4-time3)+"æ¯«ç§’");
 		System.out.println(C[rol[0]][col[0]]+" "+C[rol[1]][col[1]]+" "+C[rol[2]][col[2]]);
 		System.out.println();
-		//·½·¨Èı£ºÊ¹ÓÃÏß³Ì³Ø·½·¨½øĞĞÔËËã
+	
 		for(int i=0;i<M;i++)
 			for(int j=0;j<N;j++)
-				C[i][j]=0;//½«C¾ØÕóÈ«ÖÃÁã	
-		//½¨Á¢ËÄ¸ö¹¤×÷Ïß³Ì
+				C[i][j]=0;
+
 		Thread []poolThreads=new Thread[NUM_THREADS];
 		for(int i=0;i<NUM_THREADS;i++)
 			poolThreads[i]=new Thread(new workThread(i,A,B,C));
-		//½¨Á¢Ïß³Ì³Ø
+	
 		ExecutorService pool = Executors.newCachedThreadPool();
-		long time5=System.currentTimeMillis();//¼ÇÂ¼¿ªÊ¼Ê±¼ä
+		long time5=System.currentTimeMillis();
 		for(int i=0;i<NUM_THREADS;i++)
-			pool.execute(poolThreads[i]);//½«ËÄ¸ö¹¤×÷Ïß³Ì·ÅÈëÏß³Ì³ØÖĞÖ´ĞĞ
-		pool.shutdown();//ÔÚÏß³Ì³ØÖÕÖ¹Ç°ÔÊĞíÖ´ĞĞÒÔÇ°Ìá½»µÄÈÎÎñ
+			pool.execute(poolThreads[i]);
+		pool.shutdown();
 		while (true) {  
 			if (pool.isTerminated()) {   
 				 break;  
 			}
 		}
-		long time6=System.currentTimeMillis();//¼ÇÂ¼½áÊøÊ±¼ä
-		System.out.println("¼ÆËã["+M+","+K+"]Óë["+K+","+N+"]½×¾ØÕó³Ë·¨,Ïß³Ì³Ø¼ÆËãÓÃÊ±:"+(time6-time5)+"ºÁÃë");
+		long time6=System.currentTimeMillis();
+		System.out.println("è®¡ç®—["+M+","+K+"]ä¸["+K+","+N+"]é˜¶çŸ©é˜µä¹˜æ³•,çº¿ç¨‹æ± è®¡ç®—ç”¨æ—¶:"+(time6-time5)+"æ¯«ç§’");
 		System.out.println(C[rol[0]][col[0]]+" "+C[rol[1]][col[1]]+" "+C[rol[2]][col[2]]);
 	}
 
